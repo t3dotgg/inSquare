@@ -4,6 +4,7 @@
 inSquare (and splitSquare too!)
 ==============
 [inSquare Pebble App Store Link](https://apps.getpebble.com/applications/54d9664963eb418376000045)
+
 [splitSquare Pebble App Store Link](https://apps.getpebble.com/applications/54daffc8097dff75f7000060)
 
 VERSION
