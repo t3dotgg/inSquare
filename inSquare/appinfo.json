@@ -1,0 +1,33 @@
+{
+  "uuid": "b2c40102-de27-47a7-875d-fa783c75c1f9",
+  "shortName": "inSquare",
+  "longName": "inSquare",
+  "companyName": "TheoBrowne.com",
+  "versionCode": 2,
+  "versionLabel": "0.2",
+  "watchapp": {
+    "watchface": true
+  },
+  "appKeys": {},
+  "resources": {
+    "media": [
+      {
+        "type": "png",
+        "name": "BACKGROUND_IMAGE",
+        "file": "background.png"
+      },
+      {
+        "type": "font",
+        "name": "Font_72",
+        "characterRegex": "[0-9:]",
+        "file": "Oswald-Regular.ttf"
+      },
+      {
+        "type": "font",
+        "name": "Font_Light_72",
+        "characterRegex": "[0-9:]",
+        "file": "Oswald-Light.ttf"
+      }
+    ]
+  }
+}
