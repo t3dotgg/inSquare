@@ -1,0 +1,19 @@
+{
+  "uuid": "f9262ea9-f499-484c-b493-1dff6fc4e69f",
+  "shortName": "inColor",
+  "longName": "inColor",
+  "companyName": "Theo Browne",
+  "versionCode": 1,
+  "versionLabel": "0.1",
+  "sdkVersion": "3",
+  "targetPlatforms": ["aplite", "basalt"],
+  "watchapp": {
+    "watchface": true
+  },
+  "appKeys": {
+    "dummy": 0
+  },
+  "resources": {
+    "media": []
+  }
+}
