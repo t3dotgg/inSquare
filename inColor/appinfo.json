@@ -14,6 +14,24 @@
     "dummy": 0
   },
   "resources": {
-    "media": []
+    "media": [
+      {
+        "type": "png",
+        "name": "BACKGROUND_IMAGE",
+        "file": "background.png"
+      },
+      {
+        "type": "font",
+        "name": "Font_72",
+        "characterRegex": "[0-9:]",
+        "file": "Oswald-Regular.ttf"
+      },
+      {
+        "type": "font",
+        "name": "Font_Light_72",
+        "characterRegex": "[0-9:]",
+        "file": "Oswald-Light.ttf"
+      }
+    ]
   }
 }
