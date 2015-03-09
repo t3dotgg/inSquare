@@ -46,11 +46,9 @@ static void update_time() {
 static void main_window_load(Window *window) {
   
   //Create GBitmap, then set to created BitmapLayer
-  s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_BACKGROUND_IMAGE);
   s_background_layer = bitmap_layer_create(GRect(0, 0, 144, 168));
   s_time_font_top = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_Font_72));
   s_time_font_bottom = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_Font_Light_72));
-  bitmap_layer_set_bitmap(s_background_layer, s_background_bitmap);
   layer_add_child(window_get_root_layer(window), bitmap_layer_get_layer(s_background_layer));
   
   // Create time TextLayerTop
@@ -62,14 +60,6 @@ static void main_window_load(Window *window) {
   s_time_layer_bottom = text_layer_create(GRect(0, 74, 144, 152));
   text_layer_set_background_color(s_time_layer_bottom, GColorClear);
   text_layer_set_text(s_time_layer_bottom, "00");
-
-  #ifdef PBL_COLOR
-    text_layer_set_text_color(s_time_layer_top, GColorElectricUltramarine);
-    text_layer_set_text_color(s_time_layer_bottom, GColorElectricUltramarine);
-  #else
-    text_layer_set_text_color(s_time_layer_top, GColorWhite);
-    text_layer_set_text_color(s_time_layer_bottom, GColorWhite);
-  #endif
 
   // Add it as a child layer to the Window's root layer
   layer_add_child(window_get_root_layer(window), text_layer_get_layer(s_time_layer_top));
@@ -87,21 +77,18 @@ static void main_window_load(Window *window) {
   text_layer_set_font(s_time_layer_bottom, s_time_font_bottom);
   text_layer_set_text_alignment(s_time_layer_bottom, GTextAlignmentCenter);
 
+
   #ifdef PBL_COLOR
-    text_layer_set_text_color(s_time_layer_top, GColorElectricUltramarine);
-    text_layer_set_text_color(s_time_layer_bottom, GColorElectricUltramarine);
+    text_layer_set_text_color(s_time_layer_top, GColorWhite);
+    text_layer_set_text_color(s_time_layer_bottom, GColorWhite);
+    s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_BACKGROUND_COLOR_IMAGE);
   #else
     text_layer_set_text_color(s_time_layer_top, GColorWhite);
     text_layer_set_text_color(s_time_layer_bottom, GColorWhite);
+    s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_BACKGROUND_IMAGE);
   #endif
 
-  // Add it as a child layer to the Window's root layer
-  layer_add_child(window_get_root_layer(window), text_layer_get_layer(s_time_layer_top));
-  
-  layer_add_child(window_get_root_layer(window), text_layer_get_layer(s_time_layer_bottom));
-  
-  // Make sure the time is displayed from the start
-  update_time();
+  bitmap_layer_set_bitmap(s_background_layer, s_background_bitmap);
 
 }
 

@@ -19,6 +19,11 @@
         "type": "png",
         "name": "BACKGROUND_IMAGE",
         "file": "background.png"
+      },      
+      {
+        "type": "png",
+        "name": "BACKGROUND_COLOR_IMAGE",
+        "file": "ShapesBack1.png"
       },
       {
         "type": "font",
