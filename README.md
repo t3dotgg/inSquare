@@ -1,5 +1,4 @@
-# splitSquare
-
+# inSquare
 
 inSquare (and splitSquare too!)
 ==============
