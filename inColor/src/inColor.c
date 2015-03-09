@@ -57,7 +57,7 @@ static void main_window_load(Window *window) {
   text_layer_set_text(s_time_layer_top, "00");
   
   //Create time TextLayerBottom
-  s_time_layer_bottom = text_layer_create(GRect(0, 74, 144, 152));
+  s_time_layer_bottom = text_layer_create(GRect(0, 76, 144, 156));
   text_layer_set_background_color(s_time_layer_bottom, GColorClear);
   text_layer_set_text(s_time_layer_bottom, "00");
 
