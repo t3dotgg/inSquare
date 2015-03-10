@@ -16,8 +16,8 @@ static GFont s_time_font_top;
 static GFont s_time_font_bottom;
 static BitmapLayer *s_background_layer;
 static GBitmap *s_background_bitmap;
-GColor top_layer_color;
-GColor bottom_layer_color;
+GColor top_layer_text_color;
+GColor bottom_layer_text_color;
 
 static void update_time() {
   
@@ -81,10 +81,10 @@ static void main_window_load(Window *window) {
 
   #ifdef PBL_COLOR
     // Define the colors
-    top_layer_color = GColorFromRGB(255,255,255);
-    bottom_layer_color = GColorFromRGB(255,255,255);
-    text_layer_set_text_color(s_time_layer_top, top_layer_color);
-    text_layer_set_text_color(s_time_layer_bottom, bottom_layer_color);
+    top_layer_text_color = GColorFromRGB(255,255,255);
+    bottom_layer_text_color = GColorFromRGB(255,255,255);
+    text_layer_set_text_color(s_time_layer_top, top_layer_text_color);
+    text_layer_set_text_color(s_time_layer_bottom, bottom_layer_text_color);
     s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_BACKGROUND_COLOR_IMAGE);
   #else
     text_layer_set_text_color(s_time_layer_top, GColorWhite);
