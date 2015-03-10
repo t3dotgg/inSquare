@@ -16,6 +16,8 @@ static GFont s_time_font_top;
 static GFont s_time_font_bottom;
 static BitmapLayer *s_background_layer;
 static GBitmap *s_background_bitmap;
+GColor top_layer_color;
+GColor bottom_layer_color;
 
 static void update_time() {
   
@@ -29,7 +31,7 @@ static void update_time() {
 
   // Write the current hours and minutes into the buffer
   if(clock_is_24h_style() == true) {
-    //Use 2h hour format
+    //Use 24 hour format
     strftime(buffer, sizeof("00"), "%H", tick_time);
   } else {
     //Use 12 hour format
@@ -73,14 +75,16 @@ static void main_window_load(Window *window) {
   text_layer_set_font(s_time_layer_top, s_time_font_top);
   text_layer_set_text_alignment(s_time_layer_top, GTextAlignmentCenter);
   
-  //Same for bottom layer
+  // Same for bottom layer
   text_layer_set_font(s_time_layer_bottom, s_time_font_bottom);
   text_layer_set_text_alignment(s_time_layer_bottom, GTextAlignmentCenter);
 
-
   #ifdef PBL_COLOR
-    text_layer_set_text_color(s_time_layer_top, GColorWhite);
-    text_layer_set_text_color(s_time_layer_bottom, GColorWhite);
+    // Define the colors
+    top_layer_color = GColorFromRGB(255,255,255);
+    bottom_layer_color = GColorFromRGB(255,255,255);
+    text_layer_set_text_color(s_time_layer_top, top_layer_color);
+    text_layer_set_text_color(s_time_layer_bottom, bottom_layer_color);
     s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_BACKGROUND_COLOR_IMAGE);
   #else
     text_layer_set_text_color(s_time_layer_top, GColorWhite);
