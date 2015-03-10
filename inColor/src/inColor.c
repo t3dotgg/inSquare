@@ -2,7 +2,7 @@
   inSquare
 
   Copyright 2015 Theo Browne
-  Author: Theo Browne
+  Author: Theo Browne (with help from Greg Bartell)
   Website: TheoBrowne.com
   Github: Github.com/TheoBr
 */
