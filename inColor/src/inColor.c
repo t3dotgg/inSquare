@@ -83,15 +83,15 @@ static void main_window_load(Window *window) {
     // Define the colors
     top_layer_text_color = GColorFromRGB(255,255,255);
     bottom_layer_text_color = GColorFromRGB(255,255,255);
-    text_layer_set_text_color(s_time_layer_top, top_layer_text_color);
-    text_layer_set_text_color(s_time_layer_bottom, bottom_layer_text_color);
     s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_BACKGROUND_COLOR_IMAGE);
   #else
-    text_layer_set_text_color(s_time_layer_top, GColorWhite);
-    text_layer_set_text_color(s_time_layer_bottom, GColorWhite);
+    top_layer_text_color = GColorWhite;
+    bottom_layer_text_color = GColorWhite;
     s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_BACKGROUND_IMAGE);
   #endif
 
+  text_layer_set_text_color(s_time_layer_top, top_layer_text_color);
+  text_layer_set_text_color(s_time_layer_bottom, bottom_layer_text_color);
   bitmap_layer_set_bitmap(s_background_layer, s_background_bitmap);
 
 }

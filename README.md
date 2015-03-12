@@ -1,7 +1,9 @@
 # inSquare
 
-inSquare (and splitSquare too!)
+inSquare (splitSquare, and inColor, oh my!)
 ==============
+[Website](http://inSquare.TheoBrowne.website)
+
 [inSquare Pebble App Store Link](https://apps.getpebble.com/applications/54d9664963eb418376000045)
 
 [splitSquare Pebble App Store Link](https://apps.getpebble.com/applications/54daffc8097dff75f7000060)
@@ -12,8 +14,10 @@ v0.2
 
 INFO
 ------------
-A set of cool looking Pebble watch faces with big aspirations, maybe a Pebble Time (color) version soon too
+inSquare is a popular Pebble watchface designed to minimally display information in a tasteful manor. inColor, the Pebble Time version, in progress!
 
 CREDITS
 ------------
-Developed by [Theo Browne](http://TheoBrowne.com)
+inSquare was developed by [Theo Browne](http://TheoBrowne.com)
+
+inColor is being developed by [Theo Browne](http://TheoBrowne.com) and [Gregory Bartell](http://gregorybartell.com)
