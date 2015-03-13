@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<!--This needs to be placed on a server, I'm putting it in inSquare.Theo.website/PebbleSupport -->
+<html>
+  <head>
+    <title>inColor configuration</title>
+  </head>
+  <body>
+    <h1>inColor (Pre-Alpha)</h1>
+    <p>Settings!</p>
+ 
+    <p>Mode:
+    <select id="mode">
+      <option value="0">Normal</option>
+      <option value="1">Inverted</option>
+      <option value="2">Split</option>
+    </select>
+    </p>
+ 
+    <p>
+    <button id="save_button">Save</button>
+    </p>
+  </body>
+
+<script>
+  //Setup to allow easy adding more options later
+  function saveOptions() {
+    var mode = document.getElementById("mode");
+ 
+    var options = {
+      "mode": mode.options[mode.selectedIndex].value
+    }
+     
+    return options;
+  };
+ 
+  var submitButton = document.getElementById("save_button");
+  submitButton.addEventListener("click", 
+    function() {
+      console.log("Submit");
+ 
+      var options = saveOptions();
+      var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(options));
+       
+      document.location = location;
+    }, 
+  false);
+</script>
+
+</html>

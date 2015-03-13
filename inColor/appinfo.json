@@ -10,8 +10,9 @@
   "watchapp": {
     "watchface": true
   },
+  "capabilities": ["configurable"],
   "appKeys": {
-    "dummy": 0
+    "mode": 0
   },
   "resources": {
     "media": [

@@ -45,6 +45,11 @@ static void update_time() {
   text_layer_set_text(s_time_layer_bottom, bufferbottom);
 }
 
+static void in_recv_handler(DictionaryIterator *iterator, void *context)
+{
+  //Handles the received data from the Settings page
+}
+
 static void main_window_load(Window *window) {
   
   //Create GBitmap, then set to created BitmapLayer
