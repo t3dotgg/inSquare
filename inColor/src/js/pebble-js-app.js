@@ -14,6 +14,6 @@ Pebble.addEventListener("showConfiguration",
 Pebble.addEventListener("webviewclosed",
   function(e) {
   var configuration = JSON.parse(decodeURIComponent(e.response));
-  console.log('Configuration window returned after a long, arduous journey. Data: ', JSON.stringify(options));
+  console.log('Configuration window returned after a long, arduous journey. Data: ', JSON.stringify(configuration["mode"]));
   }
 );
