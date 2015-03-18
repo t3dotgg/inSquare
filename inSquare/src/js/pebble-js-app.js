@@ -10,3 +10,10 @@ Pebble.addEventListener("showConfiguration",
     Pebble.openURL("http://insquare.theo.website/PebbleSupport/index.html");
   }
 );
+
+Pebble.addEventListener("webviewclosed",
+  function(e) {
+  var configuration = JSON.parse(decodeURIComponent(e.response));
+  console.log('Configuration window returned after a long, arduous journey. Data: ', JSON.stringify(configuration["mode"]));
+  }
+);
