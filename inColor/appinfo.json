@@ -12,7 +12,8 @@
   },
   "capabilities": ["configurable"],
   "appKeys": {
-    "KEY_MODE": 0
+    "KEY_MODE": 0,
+    "KEY_BTV": 1
   },
   "resources": {
     "media": [

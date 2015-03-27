@@ -14,10 +14,10 @@ Pebble.addEventListener("showConfiguration",
 Pebble.addEventListener("webviewclosed",
   function(e) {
   var configuration = JSON.parse(decodeURIComponent(e.response));
-  console.log('Configuration window returned after a long, arduous journey. Data: ', JSON.stringify(configuration["mode"]));
+  console.log('Configuration window returned after a long, arduous journey. Data: ', JSON.stringify(configuration["btv"]));
 
-      Pebble.sendAppMessage(
-      {"KEY_MODE": configuration.mode},
+    Pebble.sendAppMessage(
+      {"KEY_MODE": JSON.stringify(configuration)},
       function(e) {
         console.log("Sending settings data...");
       },
@@ -25,5 +25,25 @@ Pebble.addEventListener("webviewclosed",
         console.log("Settings feedback failed!");
       }
     );
+
   }
 );
+
+Pebble.addEventListener("webviewclosed", function(e) {
+  console.log("configuration closed");
+  if (e.response != '') {
+    var options = JSON.parse(decodeURIComponent(e.response));
+    console.log("storing options: " + JSON.stringify(options));
+    window.localStorage.setItem('options', JSON.stringify(options));
+    Pebble.sendAppMessage(options,
+      function(e) {
+          console.log("Sending settings data...");
+        },
+      function(e) {
+          console.log("Settings feedback failed!");
+        }
+      );
+  } else {
+    console.log("no options received");
+  }
+});

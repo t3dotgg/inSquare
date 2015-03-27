@@ -9,7 +9,6 @@
 
 #include <pebble.h>
 
-#define KEY_MODE 0
   
 static Window *s_main_window;
 static Layer *s_canvas_layer;
@@ -22,6 +21,11 @@ static GBitmap *s_background_bitmap;
 GColor top_layer_text_color;
 GColor bottom_layer_text_color;
 GColor background_color;
+
+enum{
+  KEY_MODE = 0x0,
+  KEY_BTV = 0x1,
+};
 
 static void update_time() {
   
@@ -52,10 +56,10 @@ static void update_time() {
 static void canvas_update_proc(Layer *this_layer, GContext *ctx) {
 
   int mode = persist_read_int(KEY_MODE);
-  GRect bounds = layer_get_bounds(this_layer);
+  //GRect bounds = layer_get_bounds(this_layer);
 
   // Get the center of the screen (non full-screen)
-  GPoint center = GPoint(bounds.size.w / 2, (bounds.size.h / 2));
+  //GPoint center = GPoint(bounds.size.w / 2, (bounds.size.h / 2));
 
   // Draw the 'stalk'
 
@@ -81,7 +85,8 @@ static void canvas_update_proc(Layer *this_layer, GContext *ctx) {
 }
 
 static void bluetooth_connection_callback(bool connected){
-  if(connected != true){
+  bool btv = persist_read_bool(KEY_BTV);
+  if( (connected != true) && btv ){
     vibes_long_pulse(); //I think this should work but it's hard to debug
   }
 }
@@ -89,27 +94,24 @@ static void bluetooth_connection_callback(bool connected){
 static void in_recv_handler(DictionaryIterator *iterator, void *context)
 {
   //Get Tuple
-  Tuple *t = dict_read_first(iterator);
-  if(t)
-  {
-    switch(t->key)
-    {
-    case KEY_MODE:
-      //It's the KEY_MODE key
-      if(strcmp(t->value->cstring, "0") == 0)
+  Tuple *mode_tuple = dict_find(iterator, KEY_MODE);
+  Tuple *btv_tuple = dict_find(iterator, KEY_BTV);
+  
+  if(mode_tuple){
+      if(strcmp(mode_tuple->value->cstring, "0") == 0)
       {
         top_layer_text_color = GColorWhite;
         bottom_layer_text_color = GColorWhite;
         background_color = GColorBlack;
 
         persist_write_int(KEY_MODE, 0);
-      }else if(strcmp(t->value->cstring, "1") == 0){
+      }else if(strcmp(mode_tuple->value->cstring, "1") == 0){
         top_layer_text_color = GColorBlack;
         bottom_layer_text_color = GColorBlack;
         background_color = GColorWhite;
 
         persist_write_int(KEY_MODE, 1);
-      }else if(strcmp(t->value->cstring, "2") == 0){
+      }else if(strcmp(mode_tuple->value->cstring, "2") == 0){
         top_layer_text_color = GColorBlack;
         bottom_layer_text_color = GColorWhite;
 
@@ -120,8 +122,15 @@ static void in_recv_handler(DictionaryIterator *iterator, void *context)
         text_layer_set_text_color(s_time_layer_top, top_layer_text_color);
         text_layer_set_text_color(s_time_layer_bottom, bottom_layer_text_color);
         bitmap_layer_set_bitmap(s_background_layer, s_background_bitmap);
-      break;
-    }
+  }
+
+  if(btv_tuple){
+      if(strcmp(btv_tuple->value->cstring, "0") == 0)
+        {
+          persist_write_bool(KEY_BTV, false);
+        }else if(strcmp(btv_tuple->value->cstring, "1") == 0){
+          persist_write_bool(KEY_BTV, true);
+        }
   }
 }
 
@@ -227,7 +236,7 @@ static void init() {
     .unload = main_window_unload
   });
 
-  app_message_register_inbox_received((AppMessageInboxReceived) in_recv_handler);
+  app_message_register_inbox_received(in_recv_handler);
   app_message_open(app_message_inbox_size_maximum(), app_message_outbox_size_maximum());
   bluetooth_connection_service_subscribe(bluetooth_connection_callback);
 

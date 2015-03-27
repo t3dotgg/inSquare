@@ -13,7 +13,7 @@
       <div class="settings">
       <p>Settings!</p>
       <p>Mode:
-      <select id="mode">
+      <select id="KEY_MODE">
         <option value="0">Normal</option>
         <option value="1">Inverted</option>
         <option value="2">Split</option>
@@ -21,9 +21,9 @@
       </p>
 
       <p>Vibrate on Bluetooth Disconnect:
-      <select id="btv">
-        <option value="0">Yes</option>
-        <option value="1">No</option>
+      <select id="KEY_BTV">
+        <option value="0">No</option>
+        <option value="1">Yes</option>
       </select>
       </p>
   
@@ -41,12 +41,12 @@
   <script>
     //Setup to allow easy adding more options later
     function saveOptions() {
-      var mode = document.getElementById("mode");
-      var btv = document.getElementById("btv");
+      var KEY_MODE = document.getElementById("KEY_MODE");
+      var KEY_BTV = document.getElementById("KEY_BTV");
    
       var options = {
-        "mode": mode.options[mode.selectedIndex].value,
-        "btv": btv.options[btv.selectedIndex].value
+        "KEY_MODE": KEY_MODE.options[KEY_MODE.selectedIndex].value,
+        "KEY_BTV": KEY_BTV.options[KEY_BTV.selectedIndex].value,
       }
        
       return options;
