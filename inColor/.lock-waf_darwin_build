@@ -1,8 +1,0 @@
-argv = ['/usr/local/Cellar/pebble-sdk/3.0-dp2/libexec/Pebble/waf', 'configure', 'build']
-environ = {'TERM_SESSION_ID': '84FEDE08-9E96-4583-82FF-392086B19109', 'SSH_AUTH_SOCK': '/private/tmp/com.apple.launchd.DZFwPJNp0K/Listeners', 'PYTHONPATH': '/usr/local/Cellar/pebble-sdk/3.0-dp2/libexec/bin/../.env/lib/python2.7/site-packages', 'XPC_SERVICE_NAME': '0', 'TERM_PROGRAM_VERSION': '343.6', 'SHELL': '/bin/bash', 'LOGNAME': 'theo', 'USER': 'theo', 'HOME': '/Users/theo', 'PATH': '/Applications/SWI-Prolog.app/Contents/MacOS:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/texbin:/usr/local/Cellar/pebble-sdk/3.0-dp2/libexec/arm-cs-tools/bin', 'TMPDIR': '/var/folders/1c/bl7v7lmd177fw_lbd6g4wqkw0000gn/T/', 'TERM_PROGRAM': 'Apple_Terminal', 'LANG': 'en_US.UTF-8', 'TERM': 'xterm-256color', 'Apple_PubSub_Socket_Render': '/private/tmp/com.apple.launchd.0n5kcOASX8/Render', 'SHLVL': '2', 'XPC_FLAGS': '0x0', 'CLICOLOR': '1', '__CF_USER_TEXT_ENCODING': '0x1F5:0x0:0x0', 'PWD': '/Users/theo/Documents/git/inSquare/inColor', '_': '/usr/local/Cellar/pebble-sdk/3.0-dp2/libexec/Pebble/waf', 'PEBBLE_PHONE': '192.168.1.66'}
-files = ['/Users/theo/Documents/git/inSquare/inColor/wscript']
-hash = -2015847628201261835
-options = {'files': '', 'jobs': 4, 'verbose': 0, 'nocache': False, 'progress_bar': 0, 'timestamp': None, 'distcheck_args': None, 'top': '', 'destdir': '', 'keep': 0, 'zones': '', 'debug': False, 'prefix': '/usr/local/', 'download': False, 'force': False, 'targets': '', 'out': ''}
-out_dir = '/Users/theo/Documents/git/inSquare/inColor/build'
-run_dir = '/Users/theo/Documents/git/inSquare/inColor'
-top_dir = '/Users/theo/Documents/git/inSquare/inColor'
