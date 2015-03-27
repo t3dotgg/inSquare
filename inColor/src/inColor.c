@@ -81,7 +81,7 @@ static void canvas_update_proc(Layer *this_layer, GContext *ctx) {
 }
 
 static void bluetooth_connection_callback(bool connected){
-  if(!connected){
+  if(connected != true){
     vibes_long_pulse(); //I think this should work but it's hard to debug
   }
 }
@@ -229,10 +229,10 @@ static void init() {
 
   app_message_register_inbox_received((AppMessageInboxReceived) in_recv_handler);
   app_message_open(app_message_inbox_size_maximum(), app_message_outbox_size_maximum());
+  bluetooth_connection_service_subscribe(bluetooth_connection_callback);
 
   // Show the Window on the watch, with animated=true
   window_stack_push(s_main_window, true);
-  bluetooth_connection_service_subscribe(bluetooth_connection_callback);
   
   // Register with TickTimerService
   tick_timer_service_subscribe(MINUTE_UNIT, tick_handler);
