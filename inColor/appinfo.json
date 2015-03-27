@@ -20,15 +20,6 @@
         "type": "png",
         "name": "BACKGROUND_IMAGE",
         "file": "background.png"
-      },
-      {
-        "type": "png",
-        "name": "BACKGROUND_INVERSE_IMAGE",
-        "file": "background_inverse.png"
-      },{
-        "type": "png",
-        "name": "BACKGROUND_SPLIT_IMAGE",
-        "file": "background_split.png"
       },    
       {
         "type": "png",

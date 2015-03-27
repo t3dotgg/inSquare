@@ -12,6 +12,7 @@
 #define KEY_MODE 0
   
 static Window *s_main_window;
+static Layer *s_canvas_layer;
 static TextLayer *s_time_layer_top;
 static TextLayer *s_time_layer_bottom;
 static GFont s_time_font_top;
@@ -61,19 +62,16 @@ static void in_recv_handler(DictionaryIterator *iterator, void *context)
       {
         top_layer_text_color = GColorWhite;
         bottom_layer_text_color = GColorWhite;
-        s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_BACKGROUND_IMAGE);
 
         persist_write_bool(KEY_MODE, 0);
       }else if(strcmp(t->value->cstring, "1") == 0){
         top_layer_text_color = GColorBlack;
         bottom_layer_text_color = GColorBlack;
-        s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_BACKGROUND_INVERSE_IMAGE);
 
         persist_write_bool(KEY_MODE, 1);
       }else if(strcmp(t->value->cstring, "2") == 0){
         top_layer_text_color = GColorBlack;
         bottom_layer_text_color = GColorWhite;
-        s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_BACKGROUND_SPLIT_IMAGE);
 
         persist_write_bool(KEY_MODE, 1);
       }
@@ -85,15 +83,39 @@ static void in_recv_handler(DictionaryIterator *iterator, void *context)
   }
 }
 
+static void canvas_update_proc(Layer *this_layer, GContext *ctx) {
+  GRect bounds = layer_get_bounds(this_layer);
+
+  // Get the center of the screen (non full-screen)
+  GPoint center = GPoint(bounds.size.w / 2, (bounds.size.h / 2));
+
+  // Draw the 'stalk'
+  graphics_context_set_fill_color(ctx, GColorWhite);
+  graphics_fill_rect(ctx, GRect(14, 6, 116, 156), 0, GCornerNone);
+
+  graphics_context_set_fill_color(ctx, GColorBlack);
+  graphics_fill_rect(ctx, GRect(17, 9, 110, 150), 0, GCornerNone);
+}
+
 static void main_window_load(Window *window) {
 
   int mode = KEY_MODE;
+  Layer *window_layer = window_get_root_layer(window);
+  GRect window_bounds = layer_get_bounds(window_layer);
+
+  window_set_background_color(window, GColorBlack);
   
   //Create GBitmap, then set to created BitmapLayer
   s_background_layer = bitmap_layer_create(GRect(0, 0, 144, 168));
   s_time_font_top = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_Font_72));
   s_time_font_bottom = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_Font_Light_72));
-  layer_add_child(window_get_root_layer(window), bitmap_layer_get_layer(s_background_layer));
+  layer_add_child(window_layer, bitmap_layer_get_layer(s_background_layer));
+
+  //Creates Canvas Layer for the background stuff!
+  s_canvas_layer = layer_create(GRect(0, 0, window_bounds.size.w, window_bounds.size.h));;
+  layer_add_child(window_layer, s_canvas_layer);
+
+  layer_set_update_proc(s_canvas_layer, canvas_update_proc);
   
   // Create time TextLayerTop
   s_time_layer_top = text_layer_create(GRect(0, 4, 144, 82));
@@ -130,17 +152,19 @@ static void main_window_load(Window *window) {
     if(mode == 0){
       top_layer_text_color = GColorWhite;
       bottom_layer_text_color = GColorWhite;
-      s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_BACKGROUND_IMAGE);
+      //s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_BACKGROUND_IMAGE);
     }else if(mode == 1){
       top_layer_text_color = GColorBlack;
       bottom_layer_text_color = GColorBlack;
-      s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_BACKGROUND_INVERSE_IMAGE);
+    }else if(mode == 2){
+      top_layer_text_color = GColorBlack;
+      bottom_layer_text_color = GColorWhite;
     }
   #endif
 
   text_layer_set_text_color(s_time_layer_top, top_layer_text_color);
   text_layer_set_text_color(s_time_layer_bottom, bottom_layer_text_color);
-  bitmap_layer_set_bitmap(s_background_layer, s_background_bitmap);
+  //bitmap_layer_set_bitmap(s_background_layer, s_background_bitmap);
 
 }
 
