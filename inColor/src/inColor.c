@@ -80,6 +80,12 @@ static void canvas_update_proc(Layer *this_layer, GContext *ctx) {
   graphics_fill_rect(ctx, GRect(17, 9, 110, 150), 0, GCornerNone);
 }
 
+static void bluetooth_connection_callback(bool connected){
+  if(!connected){
+    vibes_long_pulse(); //I think this should work but it's hard to debug
+  }
+}
+
 static void in_recv_handler(DictionaryIterator *iterator, void *context)
 {
   //Get Tuple
@@ -226,6 +232,7 @@ static void init() {
 
   // Show the Window on the watch, with animated=true
   window_stack_push(s_main_window, true);
+  bluetooth_connection_service_subscribe(bluetooth_connection_callback);
   
   // Register with TickTimerService
   tick_timer_service_subscribe(MINUTE_UNIT, tick_handler);
@@ -234,6 +241,7 @@ static void init() {
 static void deinit() {
   // Destroy Window
   window_destroy(s_main_window);
+  bluetooth_connection_service_unsubscribe();
 }
 
 int main(void) {
