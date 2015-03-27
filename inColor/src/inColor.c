@@ -21,6 +21,7 @@ static BitmapLayer *s_background_layer;
 static GBitmap *s_background_bitmap;
 GColor top_layer_text_color;
 GColor bottom_layer_text_color;
+GColor background_color;
 
 static void update_time() {
   
@@ -48,6 +49,37 @@ static void update_time() {
   text_layer_set_text(s_time_layer_bottom, bufferbottom);
 }
 
+static void canvas_update_proc(Layer *this_layer, GContext *ctx) {
+
+  int mode = persist_read_int(KEY_MODE);
+  GRect bounds = layer_get_bounds(this_layer);
+
+  // Get the center of the screen (non full-screen)
+  GPoint center = GPoint(bounds.size.w / 2, (bounds.size.h / 2));
+
+  // Draw the 'stalk'
+
+  GColor frameColor;
+  GColor innerColor;
+
+  if(mode == 0){
+      frameColor = GColorWhite;
+      innerColor = GColorBlack;
+  }else if(mode == 1){
+      frameColor = GColorBlack;
+      innerColor = GColorWhite;
+  }else{
+    frameColor = GColorWhite;
+    innerColor = GColorBlack;
+  }
+
+  graphics_context_set_fill_color(ctx, frameColor);
+  graphics_fill_rect(ctx, GRect(14, 6, 116, 156), 0, GCornerNone);
+
+  graphics_context_set_fill_color(ctx, innerColor);
+  graphics_fill_rect(ctx, GRect(17, 9, 110, 150), 0, GCornerNone);
+}
+
 static void in_recv_handler(DictionaryIterator *iterator, void *context)
 {
   //Get Tuple
@@ -62,19 +94,23 @@ static void in_recv_handler(DictionaryIterator *iterator, void *context)
       {
         top_layer_text_color = GColorWhite;
         bottom_layer_text_color = GColorWhite;
+        background_color = GColorBlack;
 
-        persist_write_bool(KEY_MODE, 0);
+        persist_write_int(KEY_MODE, 0);
       }else if(strcmp(t->value->cstring, "1") == 0){
         top_layer_text_color = GColorBlack;
         bottom_layer_text_color = GColorBlack;
+        background_color = GColorWhite;
 
-        persist_write_bool(KEY_MODE, 1);
+        persist_write_int(KEY_MODE, 1);
       }else if(strcmp(t->value->cstring, "2") == 0){
         top_layer_text_color = GColorBlack;
         bottom_layer_text_color = GColorWhite;
 
-        persist_write_bool(KEY_MODE, 1);
+        persist_write_int(KEY_MODE, 2);
       }
+        layer_mark_dirty(s_canvas_layer);
+        window_set_background_color(s_main_window, background_color);
         text_layer_set_text_color(s_time_layer_top, top_layer_text_color);
         text_layer_set_text_color(s_time_layer_bottom, bottom_layer_text_color);
         bitmap_layer_set_bitmap(s_background_layer, s_background_bitmap);
@@ -83,27 +119,11 @@ static void in_recv_handler(DictionaryIterator *iterator, void *context)
   }
 }
 
-static void canvas_update_proc(Layer *this_layer, GContext *ctx) {
-  GRect bounds = layer_get_bounds(this_layer);
-
-  // Get the center of the screen (non full-screen)
-  GPoint center = GPoint(bounds.size.w / 2, (bounds.size.h / 2));
-
-  // Draw the 'stalk'
-  graphics_context_set_fill_color(ctx, GColorWhite);
-  graphics_fill_rect(ctx, GRect(14, 6, 116, 156), 0, GCornerNone);
-
-  graphics_context_set_fill_color(ctx, GColorBlack);
-  graphics_fill_rect(ctx, GRect(17, 9, 110, 150), 0, GCornerNone);
-}
-
 static void main_window_load(Window *window) {
 
-  int mode = KEY_MODE;
+  int mode = persist_read_int(KEY_MODE);
   Layer *window_layer = window_get_root_layer(window);
   GRect window_bounds = layer_get_bounds(window_layer);
-
-  window_set_background_color(window, GColorBlack);
   
   //Create GBitmap, then set to created BitmapLayer
   s_background_layer = bitmap_layer_create(GRect(0, 0, 144, 168));
@@ -152,18 +172,22 @@ static void main_window_load(Window *window) {
     if(mode == 0){
       top_layer_text_color = GColorWhite;
       bottom_layer_text_color = GColorWhite;
+      background_color = GColorBlack;
       //s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_BACKGROUND_IMAGE);
     }else if(mode == 1){
       top_layer_text_color = GColorBlack;
       bottom_layer_text_color = GColorBlack;
+      background_color = GColorWhite;
     }else if(mode == 2){
       top_layer_text_color = GColorBlack;
       bottom_layer_text_color = GColorWhite;
+      background_color = GColorBlack;
     }
   #endif
 
   text_layer_set_text_color(s_time_layer_top, top_layer_text_color);
   text_layer_set_text_color(s_time_layer_bottom, bottom_layer_text_color);
+  window_set_background_color(window, background_color);
   //bitmap_layer_set_bitmap(s_background_layer, s_background_bitmap);
 
 }
@@ -174,6 +198,7 @@ static void main_window_unload(Window *window) {
   text_layer_destroy(s_time_layer_bottom);
   // Destroy GBitmap
   gbitmap_destroy(s_background_bitmap);
+  layer_destroy(s_canvas_layer);
 
   // Destroy BitmapLayer
   bitmap_layer_destroy(s_background_layer);
