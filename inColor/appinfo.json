@@ -12,7 +12,7 @@
   },
   "capabilities": ["configurable"],
   "appKeys": {
-    "mode": 0
+    "KEY_MODE": 0
   },
   "resources": {
     "media": [
@@ -20,7 +20,16 @@
         "type": "png",
         "name": "BACKGROUND_IMAGE",
         "file": "background.png"
-      },      
+      },
+      {
+        "type": "png",
+        "name": "BACKGROUND_INVERSE_IMAGE",
+        "file": "background_inverse.png"
+      },{
+        "type": "png",
+        "name": "BACKGROUND_SPLIT_IMAGE",
+        "file": "background_split.png"
+      },    
       {
         "type": "png",
         "name": "BACKGROUND_COLOR_IMAGE",

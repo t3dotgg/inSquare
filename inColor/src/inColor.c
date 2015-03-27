@@ -8,6 +8,8 @@
 */
 
 #include <pebble.h>
+
+#define KEY_MODE 0
   
 static Window *s_main_window;
 static TextLayer *s_time_layer_top;
@@ -47,10 +49,45 @@ static void update_time() {
 
 static void in_recv_handler(DictionaryIterator *iterator, void *context)
 {
-  //Handles the received data from the Settings page
+  //Get Tuple
+  Tuple *t = dict_read_first(iterator);
+  if(t)
+  {
+    switch(t->key)
+    {
+    case KEY_MODE:
+      //It's the KEY_MODE key
+      if(strcmp(t->value->cstring, "0") == 0)
+      {
+        top_layer_text_color = GColorWhite;
+        bottom_layer_text_color = GColorWhite;
+        s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_BACKGROUND_IMAGE);
+
+        persist_write_bool(KEY_MODE, 0);
+      }else if(strcmp(t->value->cstring, "1") == 0){
+        top_layer_text_color = GColorBlack;
+        bottom_layer_text_color = GColorBlack;
+        s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_BACKGROUND_INVERSE_IMAGE);
+
+        persist_write_bool(KEY_MODE, 1);
+      }else if(strcmp(t->value->cstring, "2") == 0){
+        top_layer_text_color = GColorBlack;
+        bottom_layer_text_color = GColorWhite;
+        s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_BACKGROUND_SPLIT_IMAGE);
+
+        persist_write_bool(KEY_MODE, 1);
+      }
+        text_layer_set_text_color(s_time_layer_top, top_layer_text_color);
+        text_layer_set_text_color(s_time_layer_bottom, bottom_layer_text_color);
+        bitmap_layer_set_bitmap(s_background_layer, s_background_bitmap);
+      break;
+    }
+  }
 }
 
 static void main_window_load(Window *window) {
+
+  int mode = KEY_MODE;
   
   //Create GBitmap, then set to created BitmapLayer
   s_background_layer = bitmap_layer_create(GRect(0, 0, 144, 168));
@@ -90,9 +127,15 @@ static void main_window_load(Window *window) {
     bottom_layer_text_color = GColorFromRGB(255,255,255);
     s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_BACKGROUND_COLOR_IMAGE);
   #else
-    top_layer_text_color = GColorWhite;
-    bottom_layer_text_color = GColorWhite;
-    s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_BACKGROUND_IMAGE);
+    if(mode == 0){
+      top_layer_text_color = GColorWhite;
+      bottom_layer_text_color = GColorWhite;
+      s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_BACKGROUND_IMAGE);
+    }else if(mode == 1){
+      top_layer_text_color = GColorBlack;
+      bottom_layer_text_color = GColorBlack;
+      s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_BACKGROUND_INVERSE_IMAGE);
+    }
   #endif
 
   text_layer_set_text_color(s_time_layer_top, top_layer_text_color);
@@ -128,6 +171,9 @@ static void init() {
     .load = main_window_load,
     .unload = main_window_unload
   });
+
+  app_message_register_inbox_received((AppMessageInboxReceived) in_recv_handler);
+  app_message_open(app_message_inbox_size_maximum(), app_message_outbox_size_maximum());
 
   // Show the Window on the watch, with animated=true
   window_stack_push(s_main_window, true);

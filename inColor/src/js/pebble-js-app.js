@@ -15,5 +15,15 @@ Pebble.addEventListener("webviewclosed",
   function(e) {
   var configuration = JSON.parse(decodeURIComponent(e.response));
   console.log('Configuration window returned after a long, arduous journey. Data: ', JSON.stringify(configuration["mode"]));
+
+      Pebble.sendAppMessage(
+      {"KEY_MODE": configuration.mode},
+      function(e) {
+        console.log("Sending settings data...");
+      },
+      function(e) {
+        console.log("Settings feedback failed!");
+      }
+    );
   }
 );
