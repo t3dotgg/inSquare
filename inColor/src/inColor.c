@@ -92,6 +92,8 @@ static void canvas_update_proc(Layer *this_layer, GContext *ctx) {
     graphics_context_set_fill_color(ctx, GColorBlack);
     graphics_fill_rect(ctx, GRect(17, 84, 110, 75), 0, GCornerNone);
 
+    s_time_font_bottom = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_Font_72));
+
   }else{
     frameColor = GColorWhite;
     innerColor = GColorBlack;
@@ -103,6 +105,8 @@ static void canvas_update_proc(Layer *this_layer, GContext *ctx) {
 
     graphics_context_set_fill_color(ctx, innerColor);
     graphics_fill_rect(ctx, GRect(17, 9, 110, 150), 0, GCornerNone);
+
+    s_time_font_bottom = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_Font_Light_72));
   }
 }
 
