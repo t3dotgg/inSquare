@@ -1,11 +1,13 @@
 <html>
   <head>
-
+    
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     <link rel="stylesheet" type="text/css" href="style.css"> 
     <title>inColor configuration</title>
   </head>
 <body>
+  <div data-role="page" id="page1">
 
     <div class="title">inColor (Pre-Alpha)</div>
 
@@ -36,9 +38,30 @@
 
   <div class="footer">Created by Theo Browne and Greg Bartell</div>
 
+  </div>
+
 </body>
 
   <script>
+
+    <!-- from http://snipplr.com/view/26662/get-url-parameters-with-jquery--improved/ -->
+    $.urlParam = function(name){
+      var results = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(window.location.href);
+      if (!results) { return 0; }
+      return results[1] || 0;
+    }
+
+    function updateControls(){
+      var mode = decodeURIComponent($.urlParam("mode"));
+      var btv = decodeURIComponent($.urlParam("btv"));
+      if(mode != ''){
+        $("#KEY_MODE").val(mode).change();
+      }
+      if(btv != ''){
+        $("#KEY_BTV").val(btv).change();
+      }
+
+    }
     //Setup to allow easy adding more options later
     function saveOptions() {
       var KEY_MODE = document.getElementById("KEY_MODE");
@@ -63,6 +86,8 @@
         document.location = location;
       }, 
     false);
+
+  updateControls();
   </script>
 
 </html>
