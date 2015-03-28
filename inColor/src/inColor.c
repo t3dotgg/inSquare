@@ -67,21 +67,43 @@ static void canvas_update_proc(Layer *this_layer, GContext *ctx) {
   GColor innerColor;
 
   if(mode == 0){
-      frameColor = GColorWhite;
-      innerColor = GColorBlack;
+    frameColor = GColorWhite;
+    innerColor = GColorBlack;
   }else if(mode == 1){
-      frameColor = GColorBlack;
-      innerColor = GColorWhite;
+    frameColor = GColorBlack;
+    innerColor = GColorWhite;
+  }else if(mode == 2){
+    //splitSquare, notably different
+    graphics_context_set_fill_color(ctx, GColorWhite);
+    graphics_fill_rect(ctx, GRect(0, 0, 144, 84), 0, GCornerNone);
+
+    graphics_context_set_fill_color(ctx, GColorBlack);
+    graphics_fill_rect(ctx, GRect(14, 6, 116, 78), 0, GCornerNone);
+
+    graphics_context_set_fill_color(ctx, GColorWhite);
+    graphics_fill_rect(ctx, GRect(17, 9, 110, 75), 0, GCornerNone);
+
+    graphics_context_set_fill_color(ctx, GColorBlack);
+    graphics_fill_rect(ctx, GRect(0, 85, 144, 84), 0, GCornerNone);
+
+    graphics_context_set_fill_color(ctx, GColorWhite);
+    graphics_fill_rect(ctx, GRect(14, 84, 116, 78), 0, GCornerNone);
+
+    graphics_context_set_fill_color(ctx, GColorBlack);
+    graphics_fill_rect(ctx, GRect(17, 84, 110, 75), 0, GCornerNone);
+
   }else{
     frameColor = GColorWhite;
     innerColor = GColorBlack;
   }
 
-  graphics_context_set_fill_color(ctx, frameColor);
-  graphics_fill_rect(ctx, GRect(14, 6, 116, 156), 0, GCornerNone);
+  if(mode != 2){
+    graphics_context_set_fill_color(ctx, frameColor);
+    graphics_fill_rect(ctx, GRect(14, 6, 116, 156), 0, GCornerNone);
 
-  graphics_context_set_fill_color(ctx, innerColor);
-  graphics_fill_rect(ctx, GRect(17, 9, 110, 150), 0, GCornerNone);
+    graphics_context_set_fill_color(ctx, innerColor);
+    graphics_fill_rect(ctx, GRect(17, 9, 110, 150), 0, GCornerNone);
+  }
 }
 
 static void bluetooth_connection_callback(bool connected){
@@ -93,11 +115,13 @@ static void bluetooth_connection_callback(bool connected){
 
 static void in_recv_handler(DictionaryIterator *iterator, void *context)
 {
+  
   //Get Tuple
   Tuple *mode_tuple = dict_find(iterator, KEY_MODE);
   Tuple *btv_tuple = dict_find(iterator, KEY_BTV);
   
   if(mode_tuple){
+
       if(strcmp(mode_tuple->value->cstring, "0") == 0)
       {
         top_layer_text_color = GColorWhite;
@@ -125,6 +149,7 @@ static void in_recv_handler(DictionaryIterator *iterator, void *context)
   }
 
   if(btv_tuple){
+
       if(strcmp(btv_tuple->value->cstring, "0") == 0)
         {
           persist_write_bool(KEY_BTV, false);
