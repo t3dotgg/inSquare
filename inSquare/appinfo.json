@@ -2,23 +2,21 @@
   "uuid": "b2c40102-de27-47a7-875d-fa783c75c1f9",
   "shortName": "inSquare",
   "longName": "inSquare",
-  "companyName": "TheoBrowne.com",
-  "versionCode": 2,
-  "versionLabel": "0.2",
+  "companyName": "Theo Browne",
+  "versionCode": 1,
+  "versionLabel": "1.0",
+  "sdkVersion": "3",
+  "targetPlatforms": ["aplite"],
   "watchapp": {
     "watchface": true
   },
   "capabilities": ["configurable"],
   "appKeys": {
-    "mode": 0
+    "KEY_MODE": 0,
+    "KEY_BTV": 1
   },
   "resources": {
     "media": [
-      {
-        "type": "png",
-        "name": "BACKGROUND_IMAGE",
-        "file": "background.png"
-      },
       {
         "type": "font",
         "name": "Font_72",
