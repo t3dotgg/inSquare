@@ -1,16 +1,16 @@
 # inSquare
 
-inSquare (splitSquare, and inColor, oh my!)
+inSquare (inColor coming soon!)
 ==============
 [Website](http://inSquare.TheoBrowne.website)
 
 [inSquare Pebble App Store Link](https://apps.getpebble.com/applications/54d9664963eb418376000045)
 
-[splitSquare Pebble App Store Link](https://apps.getpebble.com/applications/54daffc8097dff75f7000060)
+[splitSquare Pebble App Store Link (To be removed soon, this watchface is included in inSquare now)](https://apps.getpebble.com/applications/54daffc8097dff75f7000060)
 
 VERSION
 ------------
-v0.2
+v1.0
 
 INFO
 ------------
