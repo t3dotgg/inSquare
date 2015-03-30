@@ -21,11 +21,18 @@ static GBitmap *s_background_bitmap;
 GColor top_layer_text_color;
 GColor bottom_layer_text_color;
 GColor background_color;
+double charge;
 
 enum{
   KEY_MODE = 0x0,
   KEY_BTV = 0x1,
 };
+
+void battery_update_callback(BatteryChargeState charge_state){
+  charge = ( (double)charge_state.charge_percent ) / 100 ;
+  APP_LOG(APP_LOG_LEVEL_DEBUG, "charge_percent: %lf", charge);
+  layer_mark_dirty(s_canvas_layer);
+}
 
 static void update_time() {
   
@@ -54,6 +61,12 @@ static void update_time() {
 }
 
 static void canvas_update_proc(Layer *this_layer, GContext *ctx) {
+
+  if(!(charge > 0)){
+    BatteryChargeState charge_state = battery_state_service_peek();
+    battery_update_callback(charge_state);
+    APP_LOG(APP_LOG_LEVEL_DEBUG, "Charge was undefined, loading now");
+  }
 
   int mode = persist_read_int(KEY_MODE);
   //GRect bounds = layer_get_bounds(this_layer);
@@ -87,7 +100,7 @@ static void canvas_update_proc(Layer *this_layer, GContext *ctx) {
     graphics_fill_rect(ctx, GRect(0, 85, 144, 84), 0, GCornerNone);
 
     graphics_context_set_fill_color(ctx, GColorWhite);
-    graphics_fill_rect(ctx, GRect(14, 84, 116, 78), 0, GCornerNone);
+    graphics_fill_rect(ctx, GRect(14, 84, (116 * charge), 78), 0, GCornerNone);
 
     graphics_context_set_fill_color(ctx, GColorBlack);
     graphics_fill_rect(ctx, GRect(17, 84, 110, 75), 0, GCornerNone);
@@ -268,6 +281,7 @@ static void init() {
   app_message_register_inbox_received(in_recv_handler);
   app_message_open(app_message_inbox_size_maximum(), app_message_outbox_size_maximum());
   bluetooth_connection_service_subscribe(bluetooth_connection_callback);
+  battery_state_service_subscribe(battery_update_callback);
 
   // Show the Window on the watch, with animated=true
   window_stack_push(s_main_window, true);
@@ -280,6 +294,7 @@ static void deinit() {
   // Destroy Window
   window_destroy(s_main_window);
   bluetooth_connection_service_unsubscribe();
+  battery_state_service_unsubscribe();
 }
 
 int main(void) {
