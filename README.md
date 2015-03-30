@@ -2,7 +2,7 @@
 
 inSquare (inColor coming soon!)
 ==============
-[Website](http://inSquare.TheoBrowne.website)
+[Website](http://inSquare.Theo.website)
 
 [inSquare Pebble App Store Link](https://apps.getpebble.com/applications/54d9664963eb418376000045)
 
