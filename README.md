@@ -10,7 +10,21 @@ inSquare (inColor coming soon!)
 
 VERSION
 ------------
-v1.0
+v1.1
+
+CHANGELOG
+------------
+
+##v1.1
+
+Small update with a cool concept! v1.1 introduces Bottom Battery Bar, which turns the bottom bar into an indicator of your Pebble's battery life. We would have liked for this to indicate your phone's battery life, but sadly watchfaces aren't able to get that information. If this feature interests you, please let us know!
+
+
+##v1.0
+
+Huge update! We've finally condensed both inSquare and splitSquare into a single version. To do this, we had to stop using png backdrops and moved to dynamically making them through code instead. This will allow for some additional fun features in the future!
+
+By popular request, we also added vibrate on Bluetooth disconnect. It's a toggle disabled by default, but this allows users to know when they've went too far from their phone. We hope you enjoy it!
 
 INFO
 ------------
