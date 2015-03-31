@@ -1,8 +1,12 @@
 inSquare (inColor coming soon!)
 ==============
-[Website](http://inSquare.Theo.website)
+[Website](http://inSquare.Theo.website) | [inSquare Pebble App Store Link](https://apps.getpebble.com/applications/54d9664963eb418376000045) | [RCOS Project Page](http://rcos.rpi.edu/projects/insquare/)
 
-[inSquare Pebble App Store Link](https://apps.getpebble.com/applications/54d9664963eb418376000045)
+
+INFO
+------------
+inSquare is a uniquely minimal watchface designed for the Pebble and Pebble Steel. A simple square with the numbered time inside, inSquare takes the minimalist digital concept and makes it elegant. With a simple customization page allowing for 3 different, unqiue modes, as well as a "vibrate on disconnect" toggle, inSquare is a great option for your wrist. With 200 users and counting, inSquare is a well loved watchface by both it's users and developers
+
 
 CHANGELOG
 ------------
@@ -17,10 +21,6 @@ Small update with a cool concept! v1.1 introduces Bottom Battery Bar, which turn
 Huge update! We've finally condensed both inSquare and splitSquare into a single version. To do this, we had to stop using png backdrops and moved to dynamically making them through code instead. This will allow for some additional fun features in the future!
 
 By popular request, we also added vibrate on Bluetooth disconnect. It's a toggle disabled by default, but this allows users to know when they've went too far from their phone. We hope you enjoy it!
-
-INFO
-------------
-inSquare is a uniquely minimal watchface designed for the Pebble and Pebble Steel. A simple square with the numbered time inside, inSquare takes the minimalist digital concept and makes it elegant. With a simple customization page allowing for 3 different, unqiue modes, as well as a "vibrate on disconnect" toggle, inSquare is a great option for your wrist. With 200 users and counting, inSquare is a well loved watchface by both it's users and developers
 
 CREDITS
 ------------
