@@ -1,5 +1,3 @@
-# inSquare
-
 inSquare (inColor coming soon!)
 ==============
 [Website](http://inSquare.Theo.website)
