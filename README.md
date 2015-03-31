@@ -8,10 +8,6 @@ inSquare (inColor coming soon!)
 
 [splitSquare Pebble App Store Link (To be removed soon, this watchface is included in inSquare now)](https://apps.getpebble.com/applications/54daffc8097dff75f7000060)
 
-VERSION
-------------
-v1.1
-
 CHANGELOG
 ------------
 
