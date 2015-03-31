@@ -4,8 +4,6 @@ inSquare (inColor coming soon!)
 
 [inSquare Pebble App Store Link](https://apps.getpebble.com/applications/54d9664963eb418376000045)
 
-[splitSquare Pebble App Store Link (To be removed soon, this watchface is included in inSquare now)](https://apps.getpebble.com/applications/54daffc8097dff75f7000060)
-
 CHANGELOG
 ------------
 
@@ -22,10 +20,10 @@ By popular request, we also added vibrate on Bluetooth disconnect. It's a toggle
 
 INFO
 ------------
-inSquare is a popular Pebble watchface designed to minimally display information in a tasteful manor. inColor, the Pebble Time version, in progress!
+inSquare is a uniquely minimal watchface designed for the Pebble and Pebble Steel. A simple square with the numbered time inside, inSquare takes the minimalist digital concept and makes it elegant. With a simple customization page allowing for 3 different, unqiue modes, as well as a "vibrate on disconnect" toggle, inSquare is a great option for your wrist. With 200 users and counting, inSquare is a well loved watchface by both it's users and developers
 
 CREDITS
 ------------
-inSquare was developed by [Theo Browne](http://TheoBrowne.com)
+inSquare is developed by [Theo Browne](http://TheoBrowne.com)
 
 inColor is being developed by [Theo Browne](http://TheoBrowne.com) and [Gregory Bartell](http://gregorybartell.com)
