@@ -10,9 +10,9 @@ Pebble.addEventListener("showConfiguration",
     console.log('About to make the url!');
     //Load the settings page from inSquare.theo.website
     if(options != null){
-      url = 'http://insquare.theo.website/PebbleSupport/betaindex.html?' + 'mode=' + encodeURIComponent(options['KEY_MODE']) + '&btv=' + encodeURIComponent(options['KEY_BTV']) + '&bbb=' + encodeURIComponent(options['KEY_BBB']);
+      url = 'http://insquare.theo.website/PebbleSupport/index-v1.1.html?' + 'mode=' + encodeURIComponent(options['KEY_MODE']) + '&btv=' + encodeURIComponent(options['KEY_BTV']) + '&bbb=' + encodeURIComponent(options['KEY_BBB']);
     }else{
-      url = 'http://insquare.theo.website/PebbleSupport/betaindex.html';
+      url = 'http://insquare.theo.website/PebbleSupport/index-v1.1.html';
     }
     console.log(url);
     Pebble.openURL(url);
