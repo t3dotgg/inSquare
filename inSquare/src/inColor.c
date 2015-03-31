@@ -26,6 +26,7 @@ double charge;
 enum{
   KEY_MODE = 0x0,
   KEY_BTV = 0x1,
+  KEY_BBB = 0x2,
 };
 
 void battery_update_callback(BatteryChargeState charge_state){
@@ -76,51 +77,70 @@ static void canvas_update_proc(Layer *this_layer, GContext *ctx) {
 
   // Draw the 'stalk'
 
+  GColor topFrameColor;
+  GColor topBackColor;
+  GColor bottomFrameColor;
+  GColor bottomBackColor;
+
   GColor frameColor;
   GColor innerColor;
 
   if(mode == 0){
-    frameColor = GColorWhite;
-    innerColor = GColorBlack;
+    topFrameColor = GColorWhite;
+    topBackColor = GColorBlack;
+    bottomFrameColor = GColorWhite;
+    bottomBackColor = GColorBlack;
+    s_time_font_bottom = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_Font_Light_72));
   }else if(mode == 1){
-    frameColor = GColorBlack;
-    innerColor = GColorWhite;
+    topFrameColor = GColorBlack;
+    topBackColor = GColorWhite;
+    bottomFrameColor = GColorBlack;
+    bottomBackColor = GColorWhite;
+    s_time_font_bottom = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_Font_Light_72));
   }else if(mode == 2){
-    //splitSquare, notably different
-    graphics_context_set_fill_color(ctx, GColorWhite);
-    graphics_fill_rect(ctx, GRect(0, 0, 144, 84), 0, GCornerNone);
-
-    graphics_context_set_fill_color(ctx, GColorBlack);
-    graphics_fill_rect(ctx, GRect(14, 6, 116, 78), 0, GCornerNone);
-
-    graphics_context_set_fill_color(ctx, GColorWhite);
-    graphics_fill_rect(ctx, GRect(17, 9, 110, 75), 0, GCornerNone);
-
-    graphics_context_set_fill_color(ctx, GColorBlack);
-    graphics_fill_rect(ctx, GRect(0, 85, 144, 84), 0, GCornerNone);
-
-    graphics_context_set_fill_color(ctx, GColorWhite);
-    graphics_fill_rect(ctx, GRect(14, 84, (116 * charge), 78), 0, GCornerNone);
-
-    graphics_context_set_fill_color(ctx, GColorBlack);
-    graphics_fill_rect(ctx, GRect(17, 84, 110, 75), 0, GCornerNone);
-
+    topFrameColor = GColorBlack;
+    topBackColor = GColorWhite;
+    bottomFrameColor = GColorWhite;
+    bottomBackColor = GColorBlack;
     s_time_font_bottom = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_Font_72));
 
   }else{
-    frameColor = GColorWhite;
-    innerColor = GColorBlack;
+    topFrameColor = GColorWhite;
+    topBackColor = GColorBlack;
+    bottomFrameColor = GColorWhite;
+    bottomBackColor = GColorBlack;
   }
 
-  if(mode != 2){
-    graphics_context_set_fill_color(ctx, frameColor);
-    graphics_fill_rect(ctx, GRect(14, 6, 116, 156), 0, GCornerNone);
+  //Background colors
+  graphics_context_set_fill_color(ctx, topBackColor);
+  graphics_fill_rect(ctx, GRect(0, 0, 144, 84), 0, GCornerNone);
+  graphics_context_set_fill_color(ctx, bottomBackColor);
+  graphics_fill_rect(ctx, GRect(0, 85, 144, 84), 0, GCornerNone);
 
-    graphics_context_set_fill_color(ctx, innerColor);
-    graphics_fill_rect(ctx, GRect(17, 9, 110, 150), 0, GCornerNone);
+  //Frame colors
+  graphics_context_set_fill_color(ctx, topFrameColor);
+  graphics_fill_rect(ctx, GRect(14, 6, 116, 78), 0, GCornerNone);
+  graphics_context_set_fill_color(ctx, bottomFrameColor);
+  graphics_fill_rect(ctx, GRect(14, 84, 116, 75), 0, GCornerNone);
 
-    s_time_font_bottom = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_Font_Light_72));
+  //Inner colors
+  graphics_context_set_fill_color(ctx, topBackColor);
+  graphics_fill_rect(ctx, GRect(17, 9, 110, 75), 0, GCornerNone);
+  graphics_context_set_fill_color(ctx, bottomBackColor);
+  graphics_fill_rect(ctx, GRect(17, 84, 110, 75), 0, GCornerNone);
+
+  //Bottom edge (and Battery Life)
+  graphics_context_set_fill_color(ctx, bottomFrameColor);
+  
+  bool bbb = persist_read_bool(KEY_BBB);
+
+  if(bbb){
+    graphics_fill_rect(ctx, GRect(14, 159, (116 * charge), 3), 0, GCornerNone);
+  }else{
+    graphics_fill_rect(ctx, GRect(14, 159, (116), 3), 0, GCornerNone);
   }
+    
+  
 }
 
 static void bluetooth_connection_callback(bool connected){
@@ -136,6 +156,7 @@ static void in_recv_handler(DictionaryIterator *iterator, void *context)
   //Get Tuple
   Tuple *mode_tuple = dict_find(iterator, KEY_MODE);
   Tuple *btv_tuple = dict_find(iterator, KEY_BTV);
+  Tuple *bbb_tuple = dict_find(iterator, KEY_BBB);
   
   if(mode_tuple){
 
@@ -172,6 +193,16 @@ static void in_recv_handler(DictionaryIterator *iterator, void *context)
           persist_write_bool(KEY_BTV, false);
         }else if(strcmp(btv_tuple->value->cstring, "1") == 0){
           persist_write_bool(KEY_BTV, true);
+        }
+  }
+
+  if(bbb_tuple){
+
+      if(strcmp(btv_tuple->value->cstring, "0") == 0)
+        {
+          persist_write_bool(KEY_BBB, false);
+        }else if(strcmp(btv_tuple->value->cstring, "1") == 0){
+          persist_write_bool(KEY_BBB, true);
         }
   }
 }

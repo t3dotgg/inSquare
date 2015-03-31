@@ -28,6 +28,13 @@
         <option value="1">Yes</option>
       </select>
       </p>
+
+      <p>Bottom Bar Width As Remaining Battery:
+      <select id="KEY_BBB">
+        <option value="0">No</option>
+        <option value="1">Yes</option>
+      </select>
+      </p>
   
       <p>
       </p>
@@ -54,11 +61,15 @@
     function updateControls(){
       var mode = decodeURIComponent($.urlParam("mode"));
       var btv = decodeURIComponent($.urlParam("btv"));
+      var bbb = decodeURIComponent($.urlParam("bbb"));
       if(mode != ''){
         $("#KEY_MODE").val(mode).change();
       }
       if(btv != ''){
         $("#KEY_BTV").val(btv).change();
+      }
+      if(bbb != ''){
+        $("#KEY_BBB").val(bbb).change();
       }
 
     }
@@ -66,10 +77,12 @@
     function saveOptions() {
       var KEY_MODE = document.getElementById("KEY_MODE");
       var KEY_BTV = document.getElementById("KEY_BTV");
+      var KEY_BBB = document.getElementById("KEY_BBB");
 
       var options = {
         "KEY_MODE": KEY_MODE.options[KEY_MODE.selectedIndex].value,
         "KEY_BTV": KEY_BTV.options[KEY_BTV.selectedIndex].value,
+        "KEY_BBB": KEY_BBB.options[KEY_BBB.selectedIndex].value,
       }
        
       return options;
