@@ -131,7 +131,7 @@ static void canvas_update_proc(Layer *this_layer, GContext *ctx) {
 
   //Bottom edge (and Battery Life)
   graphics_context_set_fill_color(ctx, bottomFrameColor);
-  
+
   bool bbb = persist_read_bool(KEY_BBB);
 
   if(bbb){
@@ -198,10 +198,10 @@ static void in_recv_handler(DictionaryIterator *iterator, void *context)
 
   if(bbb_tuple){
 
-      if(strcmp(btv_tuple->value->cstring, "0") == 0)
+      if(strcmp(bbb_tuple->value->cstring, "0") == 0)
         {
           persist_write_bool(KEY_BBB, false);
-        }else if(strcmp(btv_tuple->value->cstring, "1") == 0){
+        }else if(strcmp(bbb_tuple->value->cstring, "1") == 0){
           persist_write_bool(KEY_BBB, true);
         }
   }
