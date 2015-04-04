@@ -13,7 +13,7 @@ CHANGELOG
 
 ####v1.1
 
-Small update with a cool concept! v1.1 introduces Bottom Battery Bar, which turns the bottom bar into an indicator of your Pebble's battery life. We would have liked for this to indicate your phone's battery life, but sadly watchfaces aren't able to get that information. If this feature interests you, please let us know!
+Small update with a cool concept! v1.1 introduces Bottom Battery Bar, which turns the bottom bar into an indicator of your Pebble's battery life. We would have liked for this to indicate your phone's battery life, but sadly watchfaces aren't able to get that information. If this feature interests you, please let us know! We plan to add an additional way to view this information soon!
 
 
 ####v1.0
