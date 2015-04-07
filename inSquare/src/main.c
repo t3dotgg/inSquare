@@ -24,9 +24,9 @@ GColor background_color;
 double charge;
 
 enum{
-  KEY_MODE = 0x0,
-  KEY_BTV = 0x1,
-  KEY_BBB = 0x2,
+  KEY_MODE = 0x0, // Watch display mode
+  KEY_BTV = 0x1, // Vibrate on Bluetooth disconnect
+  KEY_BBB = 0x2, // Bottom Battery Bar
 };
 
 void battery_update_callback(BatteryChargeState charge_state){
@@ -103,7 +103,6 @@ static void canvas_update_proc(Layer *this_layer, GContext *ctx) {
     bottomFrameColor = GColorWhite;
     bottomBackColor = GColorBlack;
     s_time_font_bottom = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_Font_72));
-
   }else{
     topFrameColor = GColorWhite;
     topBackColor = GColorBlack;
@@ -139,8 +138,7 @@ static void canvas_update_proc(Layer *this_layer, GContext *ctx) {
   }else{
     graphics_fill_rect(ctx, GRect(14, 159, (116), 3), 0, GCornerNone);
   }
-    
-  
+
 }
 
 static void bluetooth_connection_callback(bool connected){
@@ -187,7 +185,6 @@ static void in_recv_handler(DictionaryIterator *iterator, void *context)
   }
 
   if(btv_tuple){
-
       if(strcmp(btv_tuple->value->cstring, "0") == 0)
         {
           persist_write_bool(KEY_BTV, false);
@@ -197,7 +194,6 @@ static void in_recv_handler(DictionaryIterator *iterator, void *context)
   }
 
   if(bbb_tuple){
-
       if(strcmp(bbb_tuple->value->cstring, "0") == 0)
         {
           persist_write_bool(KEY_BBB, false);
