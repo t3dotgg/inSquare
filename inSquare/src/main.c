@@ -26,7 +26,7 @@ double charge;
 enum{
   KEY_MODE = 0x0, // Watch display mode
   KEY_BTV = 0x1, // Vibrate on Bluetooth disconnect
-  KEY_BBB = 0x2, // Bottom Battery Bar
+  KEY_BATTMODE = 0x2, // Bottom Battery Bar
 };
 
 void battery_update_callback(BatteryChargeState charge_state){
@@ -82,9 +82,6 @@ static void canvas_update_proc(Layer *this_layer, GContext *ctx) {
   GColor bottomFrameColor;
   GColor bottomBackColor;
 
-  GColor frameColor;
-  GColor innerColor;
-
   if(mode == 0){
     topFrameColor = GColorWhite;
     topBackColor = GColorBlack;
@@ -131,9 +128,9 @@ static void canvas_update_proc(Layer *this_layer, GContext *ctx) {
   //Bottom edge (and Battery Life)
   graphics_context_set_fill_color(ctx, bottomFrameColor);
 
-  bool bbb = persist_read_bool(KEY_BBB);
+  bool battmode = persist_read_bool(KEY_BATTMODE);
 
-  if(bbb){
+  if(battmode){
     graphics_fill_rect(ctx, GRect(14, 159, (116 * charge), 3), 0, GCornerNone);
   }else{
     graphics_fill_rect(ctx, GRect(14, 159, (116), 3), 0, GCornerNone);
@@ -154,7 +151,7 @@ static void in_recv_handler(DictionaryIterator *iterator, void *context)
   //Get Tuple
   Tuple *mode_tuple = dict_find(iterator, KEY_MODE);
   Tuple *btv_tuple = dict_find(iterator, KEY_BTV);
-  Tuple *bbb_tuple = dict_find(iterator, KEY_BBB);
+  Tuple *battmode_tuple = dict_find(iterator, KEY_BATTMODE);
   
   if(mode_tuple){
 
@@ -193,12 +190,13 @@ static void in_recv_handler(DictionaryIterator *iterator, void *context)
         }
   }
 
-  if(bbb_tuple){
-      if(strcmp(bbb_tuple->value->cstring, "0") == 0)
+
+  if(battmode_tuple){
+      if(strcmp(battmode_tuple->value->cstring, "0") == 0)
         {
-          persist_write_bool(KEY_BBB, false);
-        }else if(strcmp(bbb_tuple->value->cstring, "1") == 0){
-          persist_write_bool(KEY_BBB, true);
+          persist_write_bool(KEY_BATTMODE, false);
+        }else if(strcmp(battmode_tuple->value->cstring, "1") == 0){
+          persist_write_bool(KEY_BATTMODE, true);
         }
   }
 }

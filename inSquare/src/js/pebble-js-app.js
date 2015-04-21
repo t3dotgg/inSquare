@@ -9,8 +9,8 @@ Pebble.addEventListener("showConfiguration",
     var options = JSON.parse(window.localStorage.getItem('options'));
     console.log('About to make the url!');
     //Load the settings page from inSquare.theo.website
-    if(options != null){
-      url = 'http://insquare.theo.website/PebbleSupport/index-v1.1.html?' + 'mode=' + encodeURIComponent(options['KEY_MODE']) + '&btv=' + encodeURIComponent(options['KEY_BTV']) + '&bbb=' + encodeURIComponent(options['KEY_BBB']);
+    if(options['KEY_MODE'] != null && options['KEY_BTV'] != null && options['KEY_BATMODE'] != null){
+      url = 'http://insquare.theo.website/PebbleSupport/index-v1.1.html?' + 'mode=' + encodeURIComponent(options['KEY_MODE']) + '&btv=' + encodeURIComponent(options['KEY_BTV']) + '&battmode=' + encodeURIComponent(options['KEY_BATTMODE']);
     }else{
       url = 'http://insquare.theo.website/PebbleSupport/index-v1.1.html';
     }

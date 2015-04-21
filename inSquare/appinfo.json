@@ -14,7 +14,7 @@
   "appKeys": {
     "KEY_MODE": 0,
     "KEY_BTV": 1,
-    "KEY_BBB": 2
+    "KEY_BATTMODE": 2
   },
   "resources": {
     "media": [
