@@ -18,6 +18,7 @@ static GFont s_time_font_top;
 static GFont s_time_font_bottom;
 static BitmapLayer *s_background_layer;
 static GBitmap *s_background_bitmap;
+static InverterLayer *s_inverter_layer;
 GColor top_layer_text_color;
 GColor bottom_layer_text_color;
 GColor background_color;
@@ -128,10 +129,16 @@ static void canvas_update_proc(Layer *this_layer, GContext *ctx) {
   //Bottom edge (and Battery Life)
   graphics_context_set_fill_color(ctx, bottomFrameColor);
 
-  bool battmode = persist_read_bool(KEY_BATTMODE);
+  int battmode = persist_read_int(KEY_BATTMODE);
 
-  if(battmode){
+  if(battmode == 0){
+    graphics_fill_rect(ctx, GRect(14, 159, (116), 3), 0, GCornerNone);
+  }else if(battmode == 1){
     graphics_fill_rect(ctx, GRect(14, 159, (116 * charge), 3), 0, GCornerNone);
+  }else if(battmode == 2){
+    graphics_fill_rect(ctx, GRect(14, 159, (116), 3), 0, GCornerNone);
+    s_inverter_layer = inverter_layer_create(GRect(0, 0, 144, (168* charge)));
+    layer_add_child(window_get_root_layer(s_main_window), (Layer *)s_inverter_layer);
   }else{
     graphics_fill_rect(ctx, GRect(14, 159, (116), 3), 0, GCornerNone);
   }
@@ -194,9 +201,11 @@ static void in_recv_handler(DictionaryIterator *iterator, void *context)
   if(battmode_tuple){
       if(strcmp(battmode_tuple->value->cstring, "0") == 0)
         {
-          persist_write_bool(KEY_BATTMODE, false);
+          persist_write_int(KEY_BATTMODE, 0);
         }else if(strcmp(battmode_tuple->value->cstring, "1") == 0){
-          persist_write_bool(KEY_BATTMODE, true);
+          persist_write_int(KEY_BATTMODE, 1);
+        }else if(strcmp(battmode_tuple->value->cstring, "2") == 0){
+          persist_write_int(KEY_BATTMODE, 2);
         }
   }
 }
