@@ -29,8 +29,12 @@
       </select>
       </p>
 
-      <p>Color hex code:
-      <input type="text" id="KEY_HEX_COLOR">
+      <p>Color code:
+      <select id="KEY_COLOR">
+	<option value="0">White</option>
+	<option value="1">Black</option>
+	<option value="2">Red</option>
+	<option value="3">Yellow</option>
       </select>
       </p>
   
@@ -59,27 +63,27 @@
     function updateControls(){
       var mode = decodeURIComponent($.urlParam("mode"));
       var btv = decodeURIComponent($.urlParam("btv"));
-      var hex_color = decodeURIComponent($.urlParam("hex_color"));
+      var color = decodeURIComponent($.urlParam("color"));
       if(mode != ''){
         $("#KEY_MODE").val(mode).change();
       }
       if(btv != ''){
         $("#KEY_BTV").val(btv).change();
       }
-      if(hex_color != ''){
-      	$("#KEY_HEX_COLOR").val(hex_color).change();
+      if(color != ''){
+      	$("#KEY_COLOR").val(_color).change();
       }
     }
     //Setup to allow easy adding more options later
     function saveOptions() {
       var KEY_MODE = document.getElementById("KEY_MODE");
       var KEY_BTV = document.getElementById("KEY_BTV");
-      var KEY_HEX_COLOR = document.getElementById("KEY_HEX_COLOR");
+      var KEY_COLOR = document.getElementById("KEY_COLOR");
 
       var options = {
         "KEY_MODE": KEY_MODE.options[KEY_MODE.selectedIndex].value,
         "KEY_BTV": KEY_BTV.options[KEY_BTV.selectedIndex].value,
-        "KEY_HEX_COLOR": KEY_HEX_COLOR.options[KEY_HEX_COLOR.selectedIndex].value,
+        "KEY_COLOR": KEY_COLOR.options[KEY_COLOR.selectedIndex].value,
       }
        
       return options;

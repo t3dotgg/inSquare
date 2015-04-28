@@ -1,0 +1,8 @@
+argv = ['/opt/pebble/Pebble/waf', 'configure', 'build']
+environ = {'XDG_RUNTIME_DIR': '/run/user/1000', 'COLORTERM': 'rxvt', 'LOGNAME': 'greg', 'USER': 'greg', 'HOME': '/home/greg', 'XDG_VTNR': '7', 'PATH': '/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/opt/pebble/arm-cs-tools/bin', 'XDG_SESSION_ID': 'c1', 'DISPLAY': ':0.0', '_': '/opt/pebble/Pebble/waf', 'MOZ_PLUGIN_PATH': '/usr/lib/mozilla/plugins', 'LANG': 'en_US.UTF-8', 'TERM': 'rxvt-unicode-256color', 'SHELL': '/bin/zsh', 'COLORFGBG': 'default;default', 'XAUTHORITY': '/home/greg/.Xauthority', 'SHLVL': '3', 'HISTSIZE': '1000', 'HISTCONTROL': 'ignoreboth', 'PWD': '/home/greg/RCOS/inSquare/inSquare', 'WINDOWID': '12582921', 'TERMINFO': '/usr/share/terminfo', 'MAIL': '/var/mail/greg', 'HISTFILESIZE': '10000', 'XDG_SEAT': 'seat0'}
+files = ['/home/greg/RCOS/inSquare/inSquare/wscript']
+hash = -2015847628201261835
+options = {'files': '', 'jobs': 4, 'verbose': 0, 'nocache': False, 'progress_bar': 0, 'timestamp': None, 'distcheck_args': None, 'top': '', 'destdir': '', 'keep': 0, 'zones': '', 'debug': False, 'prefix': '/usr/local/', 'download': False, 'force': False, 'targets': '', 'out': ''}
+out_dir = '/home/greg/RCOS/inSquare/inSquare/build'
+run_dir = '/home/greg/RCOS/inSquare/inSquare'
+top_dir = '/home/greg/RCOS/inSquare/inSquare'

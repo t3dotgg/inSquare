@@ -10,10 +10,10 @@ Pebble.addEventListener("showConfiguration",
     console.log('About to make the url!');
     //Load the settings page from inSquare.theo.website
     var url;
-    if(options != null){
-      url = 'http://insquare.theo.website/PebbleSupport/index.html?' + 'mode=' + encodeURIComponent(options['KEY_MODE']) + '&btv=' + encodeURIComponent(options['KEY_BTV']);
+    if(options != null && options['KEY_HEX_COLOR'] != null){
+      url = 'http://gregorybartell.com/pebble/index.html?' + 'mode=' + encodeURIComponent(options['KEY_MODE']) + '&btv=' + encodeURIComponent(options['KEY_BTV']) + '&hex_color=' + encodeURIComponent(options['KEY_HEX_COLOR']);
     }else{
-      url = 'http://insquare.theo.website/PebbleSupport/index.html';
+      url = 'http://gregorybartell.com/pebble/index.html';
     }
     console.log(url);
     Pebble.openURL(url);

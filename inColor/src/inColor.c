@@ -27,6 +27,7 @@ enum{
   KEY_MODE = 0x0, // Watch display mode
   KEY_BTV = 0x1, // Vibrate on Bluetooth disconnect
   KEY_BBB = 0x2, // Bottom Battery Bar
+  KEY_COLOR = 0x3, // Color code
 };
 
 void battery_update_callback(BatteryChargeState charge_state){
@@ -206,6 +207,7 @@ static void in_recv_handler(DictionaryIterator *iterator, void *context)
 static void main_window_load(Window *window) {
 
   int mode = persist_read_int(KEY_MODE);
+  int color = persist_read_int(KEY_COLOR);
   Layer *window_layer = window_get_root_layer(window);
   GRect window_bounds = layer_get_bounds(window_layer);
   
@@ -249,8 +251,20 @@ static void main_window_load(Window *window) {
 
   #ifdef PBL_COLOR
     // Define the colors
-    top_layer_text_color = GColorFromRGB(255,255,255);
-    bottom_layer_text_color = GColorFromRGB(255,255,255);
+    if(color == 0){
+      top_layer_text_color = GColorFromRGB(255,255,255);
+      bottom_layer_text_color = GColorFromRGB(255,255,255);
+    }else if(color == 1){
+      top_layer_text_color = GColorBlack;
+      bottom_layer_text_color = GColorBlack;
+    }else if(color == 2){
+      top_layer_text_color = GColorFromRGB(144,0,32);
+      bottom_layer_text_color = GColorFromRGB(144,0,32);
+    }else if(color == 3){
+      top_layer_text_color = GColorFromRGB(254,223,0);
+      bottom_layer_text_color = GColorFromRGB(254,223,0);
+    }
+	//GColorFromRGB(255,255,255);   
     s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_BACKGROUND_COLOR_IMAGE);
   #else
     if(mode == 0){
