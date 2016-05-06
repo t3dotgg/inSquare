@@ -1,6 +1,8 @@
-inSquare (inColor coming soon!)
+inSquare
 ==============
-[Website](http://inSquare.Theo.website) | [inSquare Pebble App Store Link](https://apps.getpebble.com/applications/54d9664963eb418376000045) | [RCOS Project Page](http://rcos.rpi.edu/projects/insquare/)
+[Check out inColor, the Pebble Time edition!](https://github.com/TheoBr/inColor)
+
+[Website](http://inSquare.Theo.website) | [inSquare Pebble App Store Link](https://apps.getpebble.com/applications/54d9664963eb418376000045)
 
 
 INFO
@@ -12,8 +14,7 @@ CHANGELOG
 ------------
 
 ####v1.2 (in development)
-Planning to add the inverseview battery view in this version. Let's do it!
-
+InverseView battery was added, but as of SDK 4.0, inverseLayer has been deprecated. Changes to be reverted.
 
 ####v1.1
 
@@ -29,5 +30,3 @@ By popular request, we also added vibrate on Bluetooth disconnect. It's a toggle
 CREDITS
 ------------
 inSquare is developed by [Theo Browne](http://TheoBrowne.com)
-
-inColor is being developed by [Theo Browne](http://TheoBrowne.com) and [Gregory Bartell](http://gregorybartell.com)
