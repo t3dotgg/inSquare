@@ -18,7 +18,6 @@ static GFont s_time_font_top;
 static GFont s_time_font_bottom;
 static BitmapLayer *s_background_layer;
 static GBitmap *s_background_bitmap;
-static InverterLayer *s_inverter_layer;
 GColor top_layer_text_color;
 GColor bottom_layer_text_color;
 GColor background_color;
@@ -135,10 +134,6 @@ static void canvas_update_proc(Layer *this_layer, GContext *ctx) {
     graphics_fill_rect(ctx, GRect(14, 159, (116), 3), 0, GCornerNone);
   }else if(battmode == 1){
     graphics_fill_rect(ctx, GRect(14, 159, (116 * charge), 3), 0, GCornerNone);
-  }else if(battmode == 2){
-    graphics_fill_rect(ctx, GRect(14, 159, (116), 3), 0, GCornerNone);
-    s_inverter_layer = inverter_layer_create(GRect(0, 0, 144, (168* charge)));
-    layer_add_child(window_get_root_layer(s_main_window), (Layer *)s_inverter_layer);
   }else{
     graphics_fill_rect(ctx, GRect(14, 159, (116), 3), 0, GCornerNone);
   }
