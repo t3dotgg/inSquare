@@ -7,7 +7,7 @@ inSquare
 
 INFO
 ------------
-inSquare is a uniquely minimal watchface designed for the Pebble and Pebble Steel. A simple square with the numbered time inside, inSquare takes the minimalist digital concept and makes it elegant. With a simple customization page allowing for 3 different, unqiue modes, as well as a "vibrate on disconnect" toggle, inSquare is a great option for your wrist. With 200 users and counting, inSquare is a well loved watchface by both it's users and developers
+inSquare is a uniquely minimal watchface designed for the Pebble and Pebble Steel. A simple square with the numbered time inside, inSquare takes the minimalist digital concept and makes it elegant. With a simple customization page allowing for 3 different, unqiue modes, as well as a "vibrate on disconnect" toggle, inSquare is a great option for your wrist. With 1000 users and counting, inSquare is a well loved watchface by both it's users and developers
 
 
 CHANGELOG
